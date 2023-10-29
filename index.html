@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<head>
+<title>demo page</title>
+</head>
+
+<script src="https://unpkg.com/tone"></script>
+<script src ="tokenise.js"></script>
+<script src ="parsetree.js"></script>
+<script src ="execution.js"></script>
+<script src ="interface.js"></script>
+
+<body>
+<input id="beat_code" type = "text" value=",:,: ?.?." autocomplete="off"/> <!--have to turn off autocomplete or js clears the value-->
+<button id = "play_pause" onclick="toggle()">play! 🔁</button>
+</br>
+<input id = "bpm" type = "range" min=20 max=800 value="120"/>
+<label id = "bpm_label" for = "bpm" style>120 BPM</label>
+</body>
