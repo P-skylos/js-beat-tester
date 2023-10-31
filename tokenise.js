@@ -5,7 +5,7 @@ function tokenize(text){
     let c;
     let token;
     const tokens = new Array();
-    for (let i = 0; i<text.length(); i++){
+    for (let i = 0; i<text.length; i++){
         c = text[i];
         //BEAT
         if (/[.,:?]/.test(c)){
@@ -26,6 +26,7 @@ function tokenize(text){
                 i++;
                 c = text[i];
             }
+            i--;//last char is not a number so we back off
             token = {location: location, type: "int", value:parseInt(int_string)}
         }
         //SKIP COMMENT
@@ -36,22 +37,41 @@ function tokenize(text){
                 i++;
                 c = text[i];
             }
+            token={type: false}
+        }
+        //whitespace
+        else if (/[\ \t]/.test(c)){
+            token={type: false}
+        }
+        else if (/\n/.test(c)){
+            token={type: false}
         }
         //NAME
         else{
-            let name = c;
+            let name = '';
             let location = i;
-            i++;
-            c = text[i];
+            // i++;
+            // c = text[i];
             while(/[^\*.,:?0-9]/.test(c)){
                 name = name + c;
                 i++;
                 c = text[i];
             }
+            i--; //test failed so we back off
             token = {location:location, type:"name", value:name}
         }
-        tokens.push(token)
+        if (token.type){
+            tokens.push(token)
+        }
     }
-    tokens.push({location:text.length(), type:"EOF", val:"EOF"})
+    tokens.push({location:text.length, type:"EOF", value:"EOF"})
     return tokens;
+}
+
+function print_tokens(tokens){
+    let string = ""
+    tokens.forEach(token => {
+        string = string + token.value;
+    });
+    return string;
 }
