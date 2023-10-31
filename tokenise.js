@@ -1,4 +1,5 @@
-// token = {type: name|int|beat, location: char number, }
+// token = {type, location, value}
+// types: : name|int|beat|syntax|EOF
 
 function tokenize(text){
     let c;
@@ -6,11 +7,16 @@ function tokenize(text){
     const tokens = new Array();
     for (let i = 0; i<text.length(); i++){
         c = text[i];
+        //BEAT
         if (/[.,:?]/.test(c)){
             token = {location: i, type: 'beat', value: c};
-        } else if (c=='[' || c==']' || c=='='){
+        }
+        //SYNTAX
+        else if (c=='[' || c==']' || c=='='){
             token = {location: i, type: 'syntax', value:c};
-        } else if (/[0-9]/.test(c)){
+        }
+        //NUMBERS
+        else if (/[0-9]/.test(c)){
             let int_string = c;
             let location = i;
             i ++;
@@ -21,7 +27,9 @@ function tokenize(text){
                 c = text[i];
             }
             token = {location: location, type: "int", value:parseInt(int_string)}
-        } else if (c == '*'){
+        }
+        //SKIP COMMENT
+        else if (c == '*'){
             i++;
             c = text[i];
             while (c != '*' && i<text.length){
@@ -29,8 +37,8 @@ function tokenize(text){
                 c = text[i];
             }
         }
+        //NAME
         else{
-            //eat name
             let name = c;
             let location = i;
             i++;
