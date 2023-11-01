@@ -36,6 +36,9 @@ function _eval(ast, time){
             break;
         case 'lookup':
             const value = context.get(ast.name.value);
+            if (! value){
+                error(`unknown variable "${ast.name.value}" at position ${ast.name.location}`)
+            }
             time = _eval(value, time);
             break;
         case 'assign':
