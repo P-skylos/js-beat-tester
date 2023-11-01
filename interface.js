@@ -18,20 +18,25 @@ function toggle(){
     else{
         document.getElementById("play_pause").innerHTML = "stop⏹";
         playing = true;
-        build(textbox.value);
     }
 }
 
 
-// // need this for audio to start playing
-// document.querySelector('#play_pause')?.addEventListener('click', async () => {
-// 	await Tone.start()
-//     console.log(textbox.value);
-//     build(textbox.value);
-// })
+// need this for audio to start playing
+let part; //needs to persist outside the function
+document.querySelector('#play_pause')?.addEventListener('click', async () => {
+	await Tone.start()
+    if (playing){
+        part = build(textbox.value);
+        Tone.Transport.start();
+    } else {
+        Tone.Transport.pause();
+        part.dispose(); //we rebuild the part each time to account for changes
+    }
+})
 
-// //bind tone bpm to slider
-// bpm_slider.addEventListener(
-//     "input",
-//     (event)=>Tone.Transport.bpm.value= event.target.value
-// );
+//bind tone bpm to slider
+bpm_slider.addEventListener(
+    "input",
+    (event)=>Tone.Transport.bpm.value= event.target.value
+);
