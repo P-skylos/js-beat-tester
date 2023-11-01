@@ -52,7 +52,7 @@ function tokenize(text){
             let location = i;
             // i++;
             // c = text[i];
-            while(/[^\*.,:?0-9]/.test(c)){
+            while(/[^\*.,=:?0-9]/.test(c)){
                 name = name + c;
                 i++;
                 c = text[i];
@@ -71,7 +71,7 @@ function tokenize(text){
 function print_tokens(tokens){
     let string = ""
     tokens.forEach(token => {
-        string = string + token.value;
+        string = `${string}>${token.value}`
     });
     return string;
 }
