@@ -63,10 +63,6 @@ function parse_loop(tokens){
 //TOOLS
 ////
 
-function error(error_string){
-    console.error(error_string);
-}
-
 function peek(tokens){ //this mostly exists as a readability choice
     if (tokens.length >= 1 ){
         return tokens[0];

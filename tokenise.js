@@ -47,7 +47,7 @@ function tokenize(text){
             token={type: false}
         }
         //NAME
-        else{
+        else if (/[a-zA-Z]/.test(c)){
             let name = c;
             let location = i;
             i++;
@@ -56,10 +56,12 @@ function tokenize(text){
                 name = name + c;
                 i++;
                 c = text[i];
-                console.log(`name: ${name}`);
             }
             i--; //test failed so we back off
             token = {location:location, type:"name", value:name}
+        }
+        else{
+            error(`unrecognised character "${c}" at position ${i}`)
         }
         if (token.type){
             tokens.push(token)

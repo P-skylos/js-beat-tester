@@ -7,6 +7,13 @@ bpm_slider.addEventListener(
         (event)=>bpm_label.textContent = event.target.value + " BPM"
 );
 
+//ERROR TO USER
+function error(error_string){
+    const error_text = document.getElementById("error_text");
+    error_text.innerHTML=`error: ${error_string}`;
+    console.error(error_string);
+}
+
 // play button toggler
 const textbox = document.getElementById("beat_code");
 let playing = false;
