@@ -54,6 +54,7 @@ function parse_loop(tokens){
     const times = chomp_by_type(tokens, 'int');
     chomp_by_string(tokens, '[');
     const beats = parse_assigns(tokens);
+    chomp_by_string(tokens, ']');
     return {type: 'loop', times: times, beats: beats}
 }
 
