@@ -31,7 +31,7 @@ function _eval(ast, time){
             break;
         case 'loop':
             for (i=0; i<ast.times.value; i++){
-                time = _eval(ast, time);
+                time = _eval(ast.beats, time);
                 time ++;
             }
             break;
@@ -61,14 +61,16 @@ function _eval_beat(ast, time){
             notes.push(["0:"+time+":2", "B2"])
             break;
         case '?':
-            break;
+            break; //advance time but do not produce a note
     }
     return time + 1;
 }
 
 function build(text){
     let tokens = tokenize(text);
+    //console.log(print_tokens(tokens))
     const ast = parse_assigns(tokens);
+    //console.log(print_parse(ast));
     const part_sequence = eval(ast);
     return make_part(part_sequence);
 }
