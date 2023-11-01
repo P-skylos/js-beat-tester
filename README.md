@@ -10,7 +10,6 @@
 - `*comment*`
 - `variable_name=[beats]` for example `foo=[,:,:..,:]`
 - `variable_name` to reference it in a beat
-All unrecognized character will simply be ignored, so you can include as much whitespace as you want and use delimiters to help visually group notes together.
 
  ## grammar
 ```
@@ -22,3 +21,7 @@ beat    -> loop | lookup | . | , | : | ? | <EOF>
 loop    -> int[beats]
 lookup  -> name
 ```
+wishlist:
+- allow the user to set the notes for each beat
+- allow multiple parts to play at once
+- add a drone part
