@@ -39,7 +39,8 @@ function _eval(ast, time){
             time = _eval(value, time);
             break;
         case 'assign':
-            context.set(ast.name.value, ast.value);
+            const fossilized_value = _eval_assignment(ast.value)
+            context.set(ast.name.value, fossilized_value);
             break;
         case 'NO-OP':
             break;
@@ -63,6 +64,28 @@ function _eval_beat(ast, time){
             break; //advance time but do not produce a note
     }
     return time + 1;
+}
+
+function _eval_assignment(ast){ //evaluate all lookups at time of assignment to dodge recursion
+    switch (ast.type){
+        case 'sequence':
+            const left = _eval_assignment(ast.left);
+            const right = _eval_assignment(ast.right);
+            return {type: 'sequence', left: left, right: right};
+        case 'beat':
+            return ast;
+        case 'loop':
+            const fossilized_beats = _eval_assignment(ast.beats);
+            return {type:'loop', times: ast.times, beats: fossilized_beats};
+        case 'lookup':
+            const value = context.get(ast.name.value);
+            const fossilized_val = _eval_assignment(value);
+            return fossilized_val;
+        case 'assign':
+            return {type: 'NO-OP'};
+        case 'NO-OP':
+            return {type: 'NO-OP'};
+    }
 }
 
 function build(text){
