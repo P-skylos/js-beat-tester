@@ -32,7 +32,6 @@ function _eval(ast, time){
         case 'loop':
             for (i=0; i<ast.times.value; i++){
                 time = _eval(ast.beats, time);
-                time ++;
             }
             break;
         case 'lookup':
