@@ -21,7 +21,7 @@ function tokenize(text){
             let location = i;
             i ++;
             c = text[i];
-            while (/[0-9]/.test(c)){
+            while (/[0-9]/.test(c)&&i<text.length){
                 int_string = int_string + c
                 i++;
                 c = text[i];
@@ -48,14 +48,15 @@ function tokenize(text){
         }
         //NAME
         else{
-            let name = '';
+            let name = c;
             let location = i;
-            // i++;
-            // c = text[i];
-            while(/[^\*.,=:?0-9]/.test(c)){
+            i++;
+            c = text[i];
+            while(/[a-zA-Z]/.test(c)&&i<text.length){
                 name = name + c;
                 i++;
                 c = text[i];
+                console.log(`name: ${name}`);
             }
             i--; //test failed so we back off
             token = {location:location, type:"name", value:name}
