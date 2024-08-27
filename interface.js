@@ -34,7 +34,8 @@ let part; //needs to persist outside the function
 document.querySelector('#play_pause')?.addEventListener('click', async () => {
 	await Tone.start()
     if (playing){
-        part = build(textbox.value);
+        part = build(textbox.innerHTML);
+        console.log(part)
         Tone.Transport.start();
     } else {
         Tone.Transport.pause();

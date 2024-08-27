@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <head>
 <title>demo page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
 
 <body>
-<input id="beat_code" type = "text" value=",:,: ?.?." autocomplete="off"/> <!--have to turn off autocomplete or js clears the value-->
-<button id = "play_pause" onclick="toggle()">play! 🔁</button>
+<h1>THE BEAT MACHINE</h1>   
+<div id="beat_machine">
+<textarea id="beat_code"  autocomplete="off" class="silkscreen-regular" rows="15">,:,: ?.?.</textarea> <!--have to turn off autocomplete or js clears the value-->
+<button id = "play_pause" onclick="toggle()" class="silkscreen-regular">play! 🔁</button>
 </br>
 <input id = "bpm_slider" type = "range" min=20 max=800 value="120"/>
-<label id = "bpm_label" for = "bpm" style>120 BPM</label>
+<label id = "bpm_label" for = "bpm" >120 BPM</label>
 <p id="error_text"></p>
+</div>
+<div id="explanation" class="silkscreen-regular">
+    <p>
+        This is a little beat machine! type a beat code in the text box! each punctuation mark is a different beat.
+        There's also loops and variable assignments
+    </p>
+    <ui style="list-style-type: square;">
+        <li><code>.</code> strong beat</li>
+        <li><code>,</code> light beat</li>
+        <li><code>:</code> double beat</li>
+        <li><code>?</code> rest 1 beat</li>
+        <li><code>N[...]</code>repeats the bracketede section N times</li>
+        <li><code>var_name=...;</code> assign a sequence to a variable. semicolon marks the end of assignment</li>
+        <li><code>[var_name]</code>dereference a variable</li>
+    </ui>
+</div>
 
 <script src ="interface.js"></script>
 <script src="https://unpkg.com/tone"></script>
