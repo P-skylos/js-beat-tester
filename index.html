@@ -5,13 +5,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="fancy_slider.css" />
 </head>
 
 
 <body>
 <h1>THE BEAT MACHINE</h1>   
 <div id="beat_machine">
-<textarea id="beat_code"  autocomplete="off" class="silkscreen-regular" rows="15">,:,: ?.?.</textarea> <!--have to turn off autocomplete or js clears the value-->
+<textarea id="beat_code"  autocomplete="off" class="silkscreen-regular" rows="15">A=[..,.]B=[?.?.]2[A][B]</textarea> <!--have to turn off autocomplete or js clears the value-->
 <button id = "play_pause" onclick="toggle()" class="silkscreen-regular">play! 🔁</button>
 </br>
 <input id = "bpm_slider" type = "range" min=20 max=800 value="120"/>
@@ -28,9 +29,9 @@
         <li><code>,</code> light beat</li>
         <li><code>:</code> double beat</li>
         <li><code>?</code> rest 1 beat</li>
-        <li><code>N[...]</code>repeats the bracketede section N times</li>
-        <li><code>var_name=...;</code> assign a sequence to a variable. semicolon marks the end of assignment</li>
-        <li><code>[var_name]</code>dereference a variable</li>
+        <li><code>N[...]</code> repeats the bracketede section N times</li>
+        <li><code>var_name=[...]</code> assign a sequence to a variable. semicolon marks the end of assignment</li>
+        <li><code>var_name</code> de-reference a variable</li>
     </ui>
 </div>
 

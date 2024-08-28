@@ -7,9 +7,9 @@ bpm_slider.addEventListener(
         (event)=>bpm_label.textContent = event.target.value + " BPM"
 );
 
+const error_text = document.getElementById("error_text");
 //ERROR TO USER
 function error(error_string){
-    const error_text = document.getElementById("error_text");
     error_text.innerHTML=`error: ${error_string}`;
     console.error(error_string);
 }
@@ -34,8 +34,9 @@ let part; //needs to persist outside the function
 document.querySelector('#play_pause')?.addEventListener('click', async () => {
 	await Tone.start()
     if (playing){
-        part = build(textbox.innerHTML);
-        console.log(part)
+        error_text.innerHTML="";
+        part = build(textbox.value);
+        console.log(textbox.value);
         Tone.Transport.start();
     } else {
         Tone.Transport.pause();

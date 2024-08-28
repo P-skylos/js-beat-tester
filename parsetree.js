@@ -14,11 +14,11 @@ loop    -> int[assigns]
 ////
 
 function parse_assigns(tokens){
-    if (peek(tokens).value==']'){
+    if (peek(tokens).value===']'){
         return{type: 'NO-OP'};
     }
     const left = parse_assign(tokens);
-    if (peek(tokens).type != "EOF"){
+    if (peek(tokens).type !== "EOF"){
         const right = parse_assigns(tokens);
         return {type:"sequence", left: left, right: right};
     }
@@ -27,11 +27,11 @@ function parse_assigns(tokens){
 
 function parse_assign(tokens){
     const token = peek(tokens);
-    if (token.type != "name"){
+    if (token.type !== "name"){
         return parse_beat(tokens);
     }
     const name = chomp_by_type(tokens, "name");
-    if (peek(tokens).value == '='){ //its an assign
+    if (peek(tokens).value === '='){ //its an assign
         chomp_by_string(tokens, '=');
         chomp_by_string(tokens, '[');
         const value = parse_assigns(tokens);
@@ -43,8 +43,11 @@ function parse_assign(tokens){
 
 function parse_beat(tokens){
     const token = peek(tokens);
-    if (token.type == 'int'){
+    if (token.type === 'int'){
         return parse_loop(tokens);
+    }
+    if (token.value === '['){
+    
     }
     const beat = chomp_by_type(tokens, 'beat');
     return {type: 'beat', beat: beat}
@@ -75,7 +78,7 @@ function chomp_by_string(tokens, string){
     if (token.value == string){
         return token;
     }
-    error(`expected '${string}' got ${token.value} at "+token.location.toString()`)
+    error(`expected '${string}' got ${token.value} at ${token.location.toString()}`)
     return false;
 }
 
@@ -84,7 +87,7 @@ function chomp_by_type(tokens, type){
     if (token.type == type){
         return token;
     }
-    error (`expected a(n) ${type} got a ${token.type} "${token.value}" at ${token.location.toString()}`)
+    error (`expected a(n) ${type} got a ${token.type} "${token                  .value}" at ${token.location.toString()}`)
     return false;
 }
 
