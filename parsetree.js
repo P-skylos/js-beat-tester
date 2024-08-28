@@ -46,9 +46,6 @@ function parse_beat(tokens){
     if (token.type === 'int'){
         return parse_loop(tokens);
     }
-    if (token.value === '['){
-    
-    }
     const beat = chomp_by_type(tokens, 'beat');
     return {type: 'beat', beat: beat}
 }
