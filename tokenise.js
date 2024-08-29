@@ -61,7 +61,7 @@ function tokenize(text){
             token = {location:location, type:"name", value:name}
         }
         else{
-            error(`unrecognised character "${c}" at position ${i}`)
+            error(`unrecognised character "${c}" at position ${i}`, i)
         }
         if (token.type){
             tokens.push(token)

@@ -7,12 +7,6 @@ bpm_slider.addEventListener(
         (event)=>bpm_label.textContent = event.target.value + " BPM"
 );
 
-const error_text = document.getElementById("error_text");
-//ERROR TO USER
-function error(error_string){
-    error_text.innerHTML=`error: ${error_string}`;
-    console.error(error_string);
-}
 
 // play button toggler
 const textbox = document.getElementById("beat_code");
@@ -28,6 +22,14 @@ function toggle(){
     }
 }
 
+//ERROR TO USER
+const error_text = document.getElementById("error_text");
+function error(error_string, error_loc){
+    error_text.innerHTML=`error: ${error_string}`;
+    console.error(error_string);
+    let code = textbox.innerText;
+    textbox.innerHTML = `${code.slice(0,error_loc)}<span class="err_highlight">${code.slice(error_loc, error_loc+1)}</span>${code.slice(error_loc+1)}`;
+}
 
 // need this for audio to start playing
 let part; //needs to persist outside the function
@@ -35,8 +37,8 @@ document.querySelector('#play_pause')?.addEventListener('click', async () => {
 	await Tone.start()
     if (playing){
         error_text.innerHTML="";
-        part = build(textbox.value);
-        console.log(textbox.value);
+        part = build(textbox.innerText);
+        console.log(textbox.innerText);
         Tone.Transport.start();
     } else {
         Tone.Transport.pause();

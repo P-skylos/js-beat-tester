@@ -33,6 +33,10 @@ code{
   line-height: 1;
   height: 10ex;
   resize: none;
+  padding: 1em;
+  width: 10%;
+  overflow-y: auto;
+  word-break: break-all;
 }
 
 #play_pause{
@@ -40,3 +44,9 @@ code{
   background-color: #424D51;
   color: #A4C0CA;
 }
+
+.err_highlight{
+  background-color: #424D51;
+  color: #A4C0CA;
+}
+

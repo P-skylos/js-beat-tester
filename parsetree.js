@@ -75,7 +75,7 @@ function chomp_by_string(tokens, string){
     if (token.value == string){
         return token;
     }
-    error(`expected '${string}' got ${token.value} at ${token.location.toString()}`)
+    error(`expected '${string}' got ${token.value} at ${token.location.toString()}`, token.location)
     return false;
 }
 
@@ -84,7 +84,7 @@ function chomp_by_type(tokens, type){
     if (token.type == type){
         return token;
     }
-    error (`expected a(n) ${type} got a ${token.type} "${token                  .value}" at ${token.location.toString()}`)
+    error (`expected a(n) ${type} got a ${token.type} "${token.value}" at ${token.location.toString()}`, token.location)
     return false;
 }
 
